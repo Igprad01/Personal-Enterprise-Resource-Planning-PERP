@@ -26,52 +26,55 @@ The Daily Activity module lets the user log, organize, and review their daily ta
 ## 4. Data Model
 
 ### 4.1 `categories`
-| Column      | Type          | Notes                          |
-|-------------|---------------|--------------------------------|
-| id          | BIGINT PK AI  |                                |
-| name        | VARCHAR(100)  | required, unique               |
-| color       | VARCHAR(7)    | hex color for UI, e.g. `#2563eb` |
-| icon        | VARCHAR(32)   | optional emoji/icon label      |
-| created_at  | TIMESTAMP     | default now                    |
+
+| Column     | Type         | Notes                            |
+| ---------- | ------------ | -------------------------------- |
+| id         | BIGINT PK AI |                                  |
+| name       | VARCHAR(100) | required, unique                 |
+| color      | VARCHAR(7)   | hex color for UI, e.g. `#2563eb` |
+| icon       | VARCHAR(32)  | optional emoji/icon label        |
+| created_at | TIMESTAMP    | default now                      |
 
 Seed categories on first run: Work, Personal, Health, Learning, Errands.
 
 ### 4.2 `activities`
-| Column          | Type              | Notes                              |
-|-----------------|-------------------|------------------------------------|
-| id              | BIGINT PK AI      |                                    |
-| title           | VARCHAR(255)      | required                           |
-| description     | TEXT NULL         |                                    |
-| category_id     | BIGINT NULL       | FK → categories.id (ON DELETE SET NULL) |
-| activity_date   | DATE              | the day this activity belongs to    |
-| start_time      | TIME NULL         | optional start                     |
-| end_time        | TIME NULL         | optional end                       |
-| duration_min    | INT NULL          | minutes; auto-calc if times given, else manual |
-| status          | ENUM planned/in_progress/done/cancelled | default planned |
-| priority        | ENUM low/medium/high | default medium                   |
-| notes           | TEXT NULL         |                                    |
-| created_at      | TIMESTAMP         | default now                        |
-| updated_at      | TIMESTAMP         | auto-update on change              |
+
+| Column        | Type                                    | Notes                                          |
+| ------------- | --------------------------------------- | ---------------------------------------------- |
+| id            | BIGINT PK AI                            |                                                |
+| title         | VARCHAR(255)                            | required                                       |
+| description   | TEXT NULL                               |                                                |
+| category_id   | BIGINT NULL                             | FK → categories.id (ON DELETE SET NULL)        |
+| activity_date | DATE                                    | the day this activity belongs to               |
+| start_time    | TIME NULL                               | optional start                                 |
+| end_time      | TIME NULL                               | optional end                                   |
+| duration_min  | INT NULL                                | minutes; auto-calc if times given, else manual |
+| status        | ENUM planned/in_progress/done/cancelled | default planned                                |
+| priority      | ENUM low/medium/high                    | default medium                                 |
+| notes         | TEXT NULL                               |                                                |
+| created_at    | TIMESTAMP                               | default now                                    |
+| updated_at    | TIMESTAMP                               | auto-update on change                          |
 
 ## 5. API Design (REST, base `/api`)
 
-| Method | Endpoint               | Description                                  |
-|--------|------------------------|----------------------------------------------|
-| GET    | `/api/health`          | liveness + db check                          |
-| GET    | `/api/categories`      | list categories                              |
-| POST   | `/api/categories`      | create category                              |
-| PUT    | `/api/categories/{id}` | update category                              |
-| DELETE | `/api/categories/{id}` | delete category                              |
-| GET    | `/api/activities`      | list; filters: `date`, `start`, `end`, `category_id`, `status`, `priority`, `q` |
-| GET    | `/api/activities/{id}` | get one                                      |
-| POST   | `/api/activities`      | create                                       |
-| PUT    | `/api/activities/{id}` | update                                       |
-| DELETE | `/api/activities/{id}` | delete                                       |
-| GET    | `/api/activities/stats`| `date`, `start`, `end` → totals              |
+| Method | Endpoint                | Description                                                                     |
+| ------ | ----------------------- | ------------------------------------------------------------------------------- |
+| GET    | `/api/health`           | liveness + db check                                                             |
+| GET    | `/api/categories`       | list categories                                                                 |
+| POST   | `/api/categories`       | create category                                                                 |
+| PUT    | `/api/categories/{id}`  | update category                                                                 |
+| DELETE | `/api/categories/{id}`  | delete category                                                                 |
+| GET    | `/api/activities`       | list; filters: `date`, `start`, `end`, `category_id`, `status`, `priority`, `q` |
+| GET    | `/api/activities/{id}`  | get one                                                                         |
+| POST   | `/api/activities`       | create                                                                          |
+| PUT    | `/api/activities/{id}`  | update                                                                          |
+| DELETE | `/api/activities/{id}`  | delete                                                                          |
+| GET    | `/api/activities/stats` | `date`, `start`, `end` → totals                                                 |
 
 **Response envelope:** `{ "data": ... }` for success, `{ "error": "message" }` for errors.
 
 **Stats response:**
+
 ```json
 {
   "total": 12,
@@ -80,7 +83,7 @@ Seed categories on first run: Work, Personal, Health, Learning, Errands.
   "in_progress": 2,
   "planned": 2,
   "total_minutes": 480,
-  "by_category": [{"category": "Work", "count": 5, "minutes": 300}]
+  "by_category": [{ "category": "Work", "count": 5, "minutes": 300 }]
 }
 ```
 
@@ -94,12 +97,12 @@ Seed categories on first run: Work, Personal, Health, Learning, Errands.
 
 ## 7. Frontend Pages
 
-| Route              | Purpose                                    |
-|--------------------|--------------------------------------------|
-| `/`                | Dashboard: today's summary + top activities |
-| `/activities`      | Full activity log with filters (date range, status, category, search) |
-| `/activities/new`  | Create activity (also inline modal)        |
-| `/activities/[id]/edit` | Edit activity                          |
+| Route                   | Purpose                                                               |
+| ----------------------- | --------------------------------------------------------------------- |
+| `/`                     | Dashboard: today's summary + top activities                           |
+| `/activities`           | Full activity log with filters (date range, status, category, search) |
+| `/activities/new`       | Create activity (also inline modal)                                   |
+| `/activities/[id]/edit` | Edit activity                                                         |
 
 - Category management UI on the activities page (add/edit/delete).
 
