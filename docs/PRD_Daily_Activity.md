@@ -2,30 +2,30 @@
 
 **Module:** Daily Activity
 **Status:** Draft v1.0
-**Stack:** Go (backend) + MySQL/MariaDB + Next.js (frontend)
+**Stack:** Go (backend) + MySQL + Next.js (frontend)
 
-## 1. Overview
+## 1. Ringkasan
 
-The Daily Activity module lets the user log, organize, and review their daily tasks and activities inside a single-user Personal ERP. It provides a lightweight time-tracking log with categories, priorities, statuses, and daily statistics so the user can plan a day and review how it went.
+Modul Daily Activity memungkinkan pengguna untuk mencatat, mengorganisasi, dan meninjau tugas serta aktivitas harian mereka di dalam sistem Personal ERP single-user. Modul ini menyediakan pencatatan waktu yang ringan dilengkapi dengan kategori, tingkat prioritas, status, dan statistik harian, sehingga pengguna dapat merencanakan hari mereka dan meninjau bagaimana aktivitas tersebut berjalan.
 
-## 2. Goals
+## 2. Tujuan
 
-- Log activities for any day (planned, ongoing, done, cancelled).
-- Organize activities with categories, priorities, and notes.
-- See a clear daily summary: total activities, done count, and time spent.
-- Filter and search activities across a date range.
-- Keep the data model simple and extendable for future ERP modules.
+- Mencatat aktivitas untuk hari apa pun (direncanakan, sedang berlangsung, selesai, dibatalkan).
+- Mengorganisasi aktivitas dengan kategori, prioritas, dan catatan.
+- Melihat ringkasan harian yang jelas: total aktivitas, jumlah yang selesai, dan waktu yang dihabiskan.
+- Memfilter dan mencari aktivitas dalam rentang tanggal.
+- Menjaga model data tetap sederhana dan dapat diperluas untuk modul ERP di masa mendatang.
 
 ## 3. Non-Goals (v1)
 
-- No multi-user/auth (single-user personal tool).
-- No recurring activities or calendar sync.
-- No attachments.
-- No activity time-tracking timers (start/stop) — only manual time entry.
+- Multi User/Auth.
+- Tidak ada aktivitas berulang atau sinkronisasi kalender.
+- Tidak ada lampiran.
+- Tidak ada timer pelacakan waktu aktivitas (mulai/berhenti) — hanya entri waktu manual.
 
-## 4. Data Model
+## 4. Model Data
 
-### 4.1 `categories`
+### 4.1 `categories` (Kategori)
 
 | Column     | Type         | Notes                            |
 | ---------- | ------------ | -------------------------------- |
