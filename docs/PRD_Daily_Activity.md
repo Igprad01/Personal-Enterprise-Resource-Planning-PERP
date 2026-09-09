@@ -122,3 +122,7 @@ Seed categories on first run: Work, Personal, Health, Learning, Errands.
 - Weekly/monthly reports and charts.
 - Auth + multi-user.
 - Calendar view / integration.
+
+## 10. fitur selanjutnya
+
+- buat fitur dashboard besok malam.
