@@ -126,3 +126,4 @@ Seed categories on first run: Work, Personal, Health, Learning, Errands.
 ## 10. fitur selanjutnya
 
 - buat fitur dashboard besok malam.
+- pakai laravel aja deh + vue js (laravel octane, )
